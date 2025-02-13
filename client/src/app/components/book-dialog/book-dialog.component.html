@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>{{book ? 'Edit Book' : 'Create Book'}}</h2>
+<mat-dialog-content>
+    <form [formGroup]="bookForm">
+        <mat-form-field subscriptSizing="dynamic">
+            <mat-label>Title</mat-label>
+            <input matInput placeholder="Ex. Game of Thrones" #input formControlName="bookName">
+            @if (bookForm.controls['bookName'].hasError('required') && bookForm.controls['bookName'].touched) {
+                <mat-hint>Title is required.</mat-hint>
+            }
+        </mat-form-field>
+        <mat-form-field subscriptSizing="dynamic">
+            <mat-label>Author</mat-label>
+            <input matInput placeholder="Ex. George R. R. Martin" #input formControlName="author">
+            @if (bookForm.controls['author'].hasError('required') && bookForm.controls['author'].touched) {
+                <mat-hint>Author is required.</mat-hint>
+            }
+        </mat-form-field>
+        <mat-form-field subscriptSizing="dynamic">
+            <mat-label>Description</mat-label>
+            <textarea rows="10" matInput placeholder="Ex. A fantastical saga about different royal families navigating their political landscapes while also contending with dragons and ice zombies." #input formControlName="description"></textarea>
+            @if (bookForm.controls['description'].hasError('required') && bookForm.controls['description'].touched) {
+                <mat-hint>Description is required.</mat-hint>
+            }
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label># Pages</mat-label>
+            <input matInput type="number" min="1" #input formControlName="pageCount">
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-stroked-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button (click)="submitBtn()" color="primary">{{book ? 'Update' : 'Submit'}}</button>
+</mat-dialog-actions>

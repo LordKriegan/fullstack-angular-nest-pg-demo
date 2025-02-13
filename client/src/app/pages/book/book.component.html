@@ -1,0 +1,25 @@
+<div class="container">
+    @if (bookData) {
+    <mat-card class="book-card" appearance="outlined">
+        <mat-card-header>
+            <mat-card-title>{{bookData.bookName}}</mat-card-title>
+            <mat-card-subtitle>{{bookData.author}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://picsum.photos/400/300" alt="book cover">
+        <!--just using an api to get a random image-->
+        <mat-card-content>
+            <p>
+                {{bookData.description}}
+            </p>
+            <p>{{bookData.pageCount}} pages</p>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-raised-button color="primary" (click)="openEditDialog()">Edit</button>
+            <button mat-raised-button color="warn" (click)="openDeleteDialog()">Delete</button>
+        </mat-card-actions>
+    </mat-card>
+    } @else {
+    <p>Loading book data...</p>
+    }
+
+</div>

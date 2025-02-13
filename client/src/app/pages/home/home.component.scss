@@ -1,0 +1,29 @@
+.bookForm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 80px;
+    margin-top: 10px;
+    form {
+        font-size: 14px;
+        flex-grow: 1;
+        .mat-mdc-form-field {
+            width: 100%;
+        }
+        button {
+            font-size: unset;
+        }
+        .advSearchWithText {
+            margin-right: 10px;
+        }
+    }
+    .addButton {
+        margin-left: 10px;
+        text-align: center;
+        .mat-icon {
+            margin: 0;
+        }
+        padding: 2em 0;
+        line-height: 1.125;
+    }
+}

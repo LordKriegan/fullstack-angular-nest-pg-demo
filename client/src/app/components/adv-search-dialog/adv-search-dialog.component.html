@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Advanced Search</h2>
+<mat-dialog-content>
+    <form [formGroup]="searchForm">
+        <mat-form-field subscriptSizing="dynamic">
+            <mat-label>Title</mat-label>
+            <input matInput placeholder="Ex. Game of Thrones" #input formControlName="bookName">
+        </mat-form-field>
+        <mat-form-field subscriptSizing="dynamic">
+            <mat-label>Author</mat-label>
+            <input matInput placeholder="Ex. George R. R. Martin" #input formControlName="author">
+        </mat-form-field>
+        <mat-form-field subscriptSizing="dynamic">
+            <mat-label>Description</mat-label>
+            <textarea rows="10" matInput placeholder="Ex. A fantastical saga about different royal families navigating their political landscapes while also contending with dragons and ice zombies." #input formControlName="description"></textarea>
+        </mat-form-field>
+        <mat-form-field subscriptSizing="dynamic">
+            <mat-label>Min Pages</mat-label>
+            <input matInput type="number" min="1" #input formControlName="minPages">
+        </mat-form-field>
+        <mat-form-field subscriptSizing="dynamic">
+            <mat-label>Max Pages</mat-label>
+            <input matInput type="number" min="1" #input formControlName="maxPages">
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-stroked-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button (click)="submitBtn()" color="primary">Search</button>
+</mat-dialog-actions>

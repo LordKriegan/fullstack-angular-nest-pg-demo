@@ -1,0 +1,18 @@
+
+.container {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-card {
+    max-width: 400px;
+}
+
+.mat-mdc-card-actions {
+    button:not(:last-child) {
+        margin-right: 10px;
+    }
+}
+  
