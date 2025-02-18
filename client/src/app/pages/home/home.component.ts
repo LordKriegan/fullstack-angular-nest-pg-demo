@@ -1,35 +1,20 @@
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { IBook } from '../../lib/interfaces/book.interface';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { FormControl, FormGroup } from '@angular/forms';
 import { BookService } from '../../lib/services/book.service';
-import { RouterLink } from '@angular/router';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { ConfirmationDialogComponent } from '../../components/confirmation-dialog/confirmation-dialog.component';
 import { BookDialogComponent } from '../../components/book-dialog/book-dialog.component';
 import { AdvSearchDialogComponent } from '../../components/adv-search-dialog/adv-search-dialog.component';
 import { IBookSearchOptions } from '../../lib/interfaces/bookSearchOptions.interface';
+import { CoreModule } from '../../lib/modules/core.module';
 
 @Component({
   selector: 'app-home',
-  imports: [
-    MatButtonModule, 
-    MatTableModule, 
-    MatIconModule, 
-    MatSortModule, 
-    MatInputModule, 
-    MatFormFieldModule, 
-    ReactiveFormsModule,
-    MatPaginatorModule,
-    MatDialogModule,
-    RouterLink
-  ],
+  imports: [ CoreModule ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

@@ -1,20 +1,12 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { IBookSearchOptions } from '../../lib/interfaces/bookSearchOptions.interface';
+import { CoreModule } from '../../lib/modules/core.module';
 
 @Component({
   selector: 'app-adv-search-dialog',
-  imports: [
-    MatButtonModule, 
-    MatDialogModule, 
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule
-  ],
+  imports: [CoreModule],
   templateUrl: './adv-search-dialog.component.html',
   styleUrl: './adv-search-dialog.component.scss'
 })

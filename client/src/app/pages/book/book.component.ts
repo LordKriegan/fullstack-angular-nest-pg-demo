@@ -1,21 +1,16 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BookService } from '../../lib/services/book.service';
 import { IBook } from '../../lib/interfaces/book.interface';
 import { first } from 'rxjs';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../../components/confirmation-dialog/confirmation-dialog.component';
 import { Router } from '@angular/router';
 import { BookDialogComponent } from '../../components/book-dialog/book-dialog.component';
+import { CoreModule } from '../../lib/modules/core.module';
 
 @Component({
   selector: 'app-book',
-  imports: [
-    MatButtonModule,
-    MatCardModule,
-    MatDialogModule
-  ],
+  imports: [ CoreModule ],
   templateUrl: './book.component.html',
   styleUrl: './book.component.scss',
 })

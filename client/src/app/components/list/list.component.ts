@@ -5,7 +5,6 @@ import { Component, Input } from '@angular/core';
   imports: [],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
-  
 })
 export class ListComponent {
   @Input('items') items: string[];

@@ -1,20 +1,12 @@
 import { Component, Inject } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IBook } from '../../lib/interfaces/book.interface';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CoreModule } from '../../lib/modules/core.module';
 
 @Component({
   selector: 'app-book-dialog',
-  imports: [
-    MatButtonModule, 
-    MatDialogModule, 
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule
-  ],
+  imports: [ CoreModule ],
   templateUrl: './book-dialog.component.html',
   styleUrl: './book-dialog.component.scss'
 })

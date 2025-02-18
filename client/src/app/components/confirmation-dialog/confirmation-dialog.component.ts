@@ -1,11 +1,11 @@
 import { Component, Inject } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IBook } from '../../lib/interfaces/book.interface';
+import { CoreModule } from '../../lib/modules/core.module';
 
 @Component({
   selector: 'app-confirmation-dialog',
-  imports: [MatButtonModule, MatDialogModule],
+  imports: [ CoreModule ],
   templateUrl: './confirmation-dialog.component.html',
   styleUrl: './confirmation-dialog.component.scss'
 })

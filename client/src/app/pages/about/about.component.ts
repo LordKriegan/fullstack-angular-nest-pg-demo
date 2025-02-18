@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { ListComponent } from '../../components/list/list.component';
+import { CoreModule } from '../../lib/modules/core.module';
+import { COMPONENTS } from '../../lib/other/components';
 
 @Component({
   selector: 'app-about',
-  imports: [ ListComponent ],
+  imports: [ CoreModule, ...COMPONENTS ],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss'
 })
