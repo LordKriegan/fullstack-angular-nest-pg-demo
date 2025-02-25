@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { ChapterEntity as Chapter } from "./chapter.entity";
 
 @Entity()
 export class BookEntity {
@@ -16,4 +17,10 @@ export class BookEntity {
 
     @Column({ type: 'varchar', length: '500' })
     description: string;
+
+    @OneToMany(() => Chapter, chapter => chapter.book, {
+        cascade: true,
+        onDelete: 'CASCADE'
+    })
+    chapters: Chapter[];
 }   

@@ -9,6 +9,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "dev": "concurrently -p=\"{name}\" -n=\"Angular,NestJS\" -c=\"green,blue\" \"npm run start:fe\" \"npm run start:be\"",
+    "pop-db": "npx ts-node ./api/src/lib/populate-db.ts",
     "start": "nest start",
     "start:be": "nest start -p ./api/tsconfig.json --watch",
     "start:fe": "cd ./client && ng serve",

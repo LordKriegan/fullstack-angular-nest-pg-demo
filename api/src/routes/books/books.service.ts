@@ -2,7 +2,6 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { Repository, LessThanOrEqual, MoreThanOrEqual, FindOptionsWhere, Between, Like } from 'typeorm';
 import { BookEntity as Book } from 'src/entities/book.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { faker } from '@faker-js/faker';
 
 @Injectable()
 export class BooksService {
@@ -44,7 +43,10 @@ export class BooksService {
     return  this.bookRepository.findBy(findOptions)
   }
   async getBook(id: number): Promise<Book> {
-    const book = await this.bookRepository.findOneBy({ id });
+    const book = await this.bookRepository.findOne({
+      where: { id },
+      relations: ['chapters']
+    });
     if (!book) {
       throw new HttpException('Book not found!', 404)
     }
@@ -61,17 +63,4 @@ export class BooksService {
   async deleteBook(id: number): Promise<void> {
     this.bookRepository.delete({ id })
   }
-
-  async populateDb() {
-    for (let i = 0; i < 100; i++) {
-      const newBook = this.bookRepository.create({ 
-        bookName: faker.book.title(), 
-        author: faker.book.author(), 
-        description: faker.lorem.paragraphs().slice(0, 500), 
-        pageCount: faker.number.int({ max: 750, min: 1})
-      });
-      await this.bookRepository.save(newBook);
-    }
-  }
-
 }

@@ -45,9 +45,4 @@ export class BooksController {
   ): Promise<void> {
        return this.booksService.deleteBook(id)
   }
-
-  @Post('/populate-database')
-  async populateDb(): Promise<void> {
-     return this.booksService.populateDb()
-  }
 }
