@@ -87,17 +87,18 @@ export class HomeComponent implements AfterViewInit {
 
   openEditDialog(book?: IBook) {
     this.dialog.open(BookDialogComponent, { data: book, width: '500px'}).afterClosed().subscribe({
-      next: (result: IBook) => {
-        if (result) {
-          if (result.id) { //existing book
-            this.bookService.updateBook(result).subscribe({
+      next: (result: { bookUpdated: boolean, newBook: IBook }) => {
+        if (result.bookUpdated) {
+          if (result.newBook.id) { //existing book
+            console.log(result.newBook)
+            this.bookService.updateBook(result.newBook).subscribe({
               next: (updatedBook: IBook) => {
-                this.dataSource.data[this.dataSource.data.findIndex(elem => elem.id === updatedBook.id)] = updatedBook;
+                this.dataSource.data[this.dataSource.data.findIndex(elem => elem.id === updatedBook.id)] = result.newBook;
                 this.dataSource._updateChangeSubscription();
               }
             })
           } else { //create new book
-            this.bookService.createBook(result).subscribe({
+            this.bookService.createBook(result.newBook).subscribe({
               next: (newBook: IBook) => {
                 this.dataSource.data.push(newBook);
                 this.dataSource._updateChangeSubscription();

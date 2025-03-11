@@ -6,7 +6,7 @@ export class UpdateBookDTO {
 
     @IsOptional()
     @IsArray()
-    @IsString()
+    @IsString({ each: true })
     @IsNotEmpty()
     authors: string[];
 

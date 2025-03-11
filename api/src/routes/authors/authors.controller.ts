@@ -10,12 +10,12 @@ export class AuthorsController {
         private authorsService: AuthorsService
     ){}
 
-    @Post(":bookId")
+    @Post(":id")
     async createAuthor(
-        @Param(new ValidationPipe({ transform: true })) { id: bookId }: LocateBookDTO,
+        @Param(new ValidationPipe({ transform: true })) { id }: LocateBookDTO,
         @Body() { author }: UpdateAuthorDTO
     ): Promise<Author> {
-        return this.authorsService.createAuthor(bookId, author);
+        return this.authorsService.createAuthor(id, author);
     }
 
     @Put(":id")

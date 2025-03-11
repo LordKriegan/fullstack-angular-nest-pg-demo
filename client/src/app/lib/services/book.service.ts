@@ -60,6 +60,9 @@ export class BookService {
         return new Observable((sub: Subscriber<IBook>) => {
             this.http.put<IBook>(`/api/books/${book.id}`, book).pipe(first()).subscribe({
                 next: (updatedBook: IBook) => {
+                    //updated book may include authors and chapters which is not handled by this route and may fail the DTOs
+                    delete updatedBook.authors;
+                    delete updatedBook.chapters;
                     sub.next(updatedBook);
                     sub.complete();
                 },
