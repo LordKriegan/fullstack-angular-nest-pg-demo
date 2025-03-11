@@ -10,6 +10,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatTabsModule } from '@angular/material/tabs'
 
 @NgModule({
   exports: [
@@ -23,7 +24,8 @@ import { MatChipsModule } from '@angular/material/chips';
     MatPaginatorModule,
     MatFormFieldModule,
     MatToolbarModule,
-    MatChipsModule
+    MatChipsModule,
+    MatTabsModule
   ]
 })
 export class MaterialModule {}
