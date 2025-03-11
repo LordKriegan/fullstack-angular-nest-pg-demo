@@ -2,47 +2,55 @@ import 'reflect-metadata';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { BookEntity as Book } from '../entities/book.entity';
 import { ChapterEntity as Chapter } from '../entities/chapter.entity';
+import { AuthorEntity as Author } from '../entities/author.entity';
 import { faker } from '@faker-js/faker';
 import { dbconfig } from '../config/dbconfig';
 
-const dataSource = new DataSource(<DataSourceOptions>dbconfig)
+const dataSource = new DataSource(<DataSourceOptions> dbconfig);
 
-const seedDb = async () => {
+const seedDb = async() => {
     try {
-        await dataSource.initialize()
-        console.log("Connected to database...");
+        await dataSource.initialize();
         const bookRepository = dataSource.getRepository(Book);
+        const authorRepository = dataSource.getRepository(Author);
         const chapterRepository = dataSource.getRepository(Chapter);
 
-        console.log("Starting database population")
+        console.log("Starting database seeding...")
+
         for (let i = 0; i < 100; i++) {
-            //create book
             const newBook = bookRepository.create({
                 bookName: faker.book.title(),
-                author: faker.book.author(),
-                description: faker.lorem.paragraphs().slice(0, 500),
-                pageCount: faker.number.int({ max: 750, min: 1 })
-            });
-            await bookRepository.save(newBook);
+                pageCount: faker.number.int({ min: 1, max: 1000 }),
+                description: faker.lorem.paragraph().slice(0, 500)
+            })
 
-            //create random number of chapters
-            const chapterCount = Math.floor((Math.random() * 30) + 1)
-            for (let i = 0; i < chapterCount; i++) {
+            const savedBook = await bookRepository.save(newBook);
+
+            const numAuthors: number = faker.number.int({min: 1, max: 3})
+            for (let i = 0; i < numAuthors; i++) {
+                const newAuthor = authorRepository.create({
+                    book: savedBook,
+                    author: faker.book.author()
+                });
+                await authorRepository.save(newAuthor);
+            }
+            const numChapters: number = faker.number.int({min: 1, max: 30})
+            for (let i = 0; i < numChapters; i++) {
                 const newChapter = chapterRepository.create({
+                    book: savedBook,
                     chapterName: faker.book.title(),
-                    pageCount: faker.number.int({ max: 100, min: 1 }),
-                    description: faker.lorem.paragraphs().slice(0, 500),
-                    book: newBook
-                })
+                    description: faker.lorem.paragraph().slice(0, 500),
+                    pageCount: faker.number.int({ min: 1, max: 100 })
+                });
                 await chapterRepository.save(newChapter);
             }
         }
-
-        console.log("Completed database population...")
+        console.log("Completed seeding...")
     } catch (error) {
-        console.error("error seeding db: ", error)
-        process.exit(1)
+        console.error("Error while populating db: ", error);
+        process.exit(1);
     }
 }
+
 
 seedDb()

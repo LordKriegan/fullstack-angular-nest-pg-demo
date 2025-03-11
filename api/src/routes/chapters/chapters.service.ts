@@ -21,18 +21,6 @@ export class ChaptersService {
         })
         return this.chaptersRepository.save(chapter)
     }
-    
-    async findChapter(id: number): Promise<Chapter> {
-        const chapter = await this.chaptersRepository.findOneBy({ id })
-        if (!chapter) {
-            throw new HttpException('Chapter not found!', 404)
-        }
-        return chapter;
-    }
-
-    async findAllChaptersByBook(id: number): Promise<Chapter[]> {
-        return this.chaptersRepository.findBy({ book: { id }})
-    }
 
     async updateChapter(id: number, chapterName: string, pageCount: number, description: string): Promise<Chapter> {
         const chapter = this.chaptersRepository.create({ id, chapterName, pageCount, description });

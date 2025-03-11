@@ -1,15 +1,24 @@
-import { IsNotEmpty, IsString, IsNumber, IsPositive, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsString, IsNumber, IsPositive, IsOptional, IsArray } from 'class-validator';
 import { Transform } from 'class-transformer';
+import { UpdateChapterDTO } from './chapters.dtos';
 
 export class UpdateBookDTO {
+
+    @IsOptional()
+    @IsArray()
+    @IsString()
+    @IsNotEmpty()
+    authors: string[];
+
+    @IsOptional()
+    @IsArray()
+    @IsString()
+    @IsNotEmpty()
+    chapters: UpdateChapterDTO[];
 
     @IsNotEmpty()
     @IsString()
     bookName: string;
-
-    @IsNotEmpty()
-    @IsString()
-    author: string;
 
     @IsNumber()
     @IsPositive()
@@ -40,6 +49,11 @@ export class SearchBookDTO {
     @IsNotEmpty()
     @IsString()
     author: string;
+
+    @IsOptional()
+    @IsNotEmpty()
+    @IsString()
+    chapter: string;
 
     @IsOptional()
     @IsNumber()

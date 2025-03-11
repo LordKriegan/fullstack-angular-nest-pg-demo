@@ -16,9 +16,9 @@ export class BooksController {
   }
   @Get('searchBooks')
   async searchBooks(
-      @Query() { bookName, author, description, minPages, maxPages }: SearchBookDTO
+      @Query() { bookName, author, chapter, description, minPages, maxPages }: SearchBookDTO
   ): Promise<Book[]> {
-       return this.booksService.searchBooks(bookName, author, description, minPages, maxPages)
+       return this.booksService.searchBooks(bookName, author, chapter, description, minPages, maxPages)
   }
   @Get(':id')
   async getBook(
@@ -28,16 +28,16 @@ export class BooksController {
   }
   @Post()
   async saveBook(
-      @Body() { bookName, author, description, pageCount }: UpdateBookDTO
+      @Body() { bookName, authors, chapters, description, pageCount }: UpdateBookDTO
   ): Promise<Book> {
-       return this.booksService.createBook(bookName, author, description, pageCount)
+       return this.booksService.createBook(bookName, authors, chapters, description, pageCount)
   }
   @Put(':id')
   async updateBook(
     @Param(new ValidationPipe({ transform: true })) { id }: LocateBookDTO,
-    @Body() { bookName, author, description, pageCount }: UpdateBookDTO
+    @Body() { bookName, description, pageCount }: UpdateBookDTO
   ): Promise<Book> {
-       return this.booksService.updateBook(id, bookName, author, description, pageCount)
+       return this.booksService.updateBook(id, bookName, description, pageCount)
   }
   @Delete(':id')
   async deleteBook(
