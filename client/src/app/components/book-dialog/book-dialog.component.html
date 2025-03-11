@@ -8,13 +8,13 @@
                 <mat-hint>Title is required.</mat-hint>
             }
         </mat-form-field>
-        <mat-form-field subscriptSizing="dynamic">
+        <!-- <mat-form-field subscriptSizing="dynamic">
             <mat-label>Author</mat-label>
             <input matInput placeholder="Ex. George R. R. Martin" #input formControlName="author">
             @if (bookForm.controls['author'].hasError('required') && bookForm.controls['author'].touched) {
                 <mat-hint>Author is required.</mat-hint>
             }
-        </mat-form-field>
+        </mat-form-field> -->
         <mat-form-field subscriptSizing="dynamic">
             <mat-label>Description</mat-label>
             <textarea rows="10" matInput placeholder="Ex. A fantastical saga about different royal families navigating their political landscapes while also contending with dragons and ice zombies." #input formControlName="description"></textarea>

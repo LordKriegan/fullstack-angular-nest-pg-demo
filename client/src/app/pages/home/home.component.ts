@@ -44,20 +44,30 @@ export class HomeComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.resetDataSource(true)
-  }
-
-  resetDataSource(init: boolean = false) {
     this.bookService.getBooks().subscribe({
       next: (books: IBook[]) => {
         this.bookData = books;
+        this.resetDataSource(true);
+      }
+    })
+  }
+
+  resetDataSource(init: boolean = false) {
         this.dataSource = new MatTableDataSource(this.bookData);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-        if (!init)
-          this.dataSource._updateChangeSubscription();
-      }
-    })
+        this.dataSource.filterPredicate = (data: IBook, filter: string) => {
+          
+          const filtersFound: boolean[] = [];
+          const filterLower = filter.toLowerCase();
+          filtersFound.push(data.bookName?.toLowerCase().includes(filterLower) || false);
+          filtersFound.push(data.pageCount?.toString().toLowerCase().includes(filterLower) || false);
+          filtersFound.push(data.description?.toLowerCase().includes(filterLower) || false);
+          filtersFound.push(data.authors?.map(({ author }) => author).join(' ').toLowerCase().includes(filterLower) || false);
+          filtersFound.push(data.chapters?.map(({ chapterName }) => chapterName).join(' ').toLowerCase().includes(filterLower) || false);
+          return filtersFound.length ? filtersFound.reduce((a: boolean, b: boolean) => Boolean(a || b)) : true;
+        }
+        if (!init) this.dataSource._updateChangeSubscription();
   }
 
   openDeleteDialog(book: IBook) {
@@ -106,9 +116,7 @@ export class HomeComponent implements AfterViewInit {
           this.bookService.advancedSearch(result).subscribe({
             next: (books: IBook[]) => {
               this.bookData = books;
-              this.dataSource = new MatTableDataSource(this.bookData);
-              this.dataSource.sort = this.sort;
-              this.dataSource.paginator = this.paginator;
+              this.resetDataSource(false)
               this.showResetButton = true;
               this.dataSource._updateChangeSubscription();
             }

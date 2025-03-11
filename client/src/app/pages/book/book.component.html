@@ -3,7 +3,11 @@
     <mat-card class="book-card" appearance="outlined">
         <mat-card-header>
             <mat-card-title>{{bookData.bookName}}</mat-card-title>
-            <mat-card-subtitle>{{bookData.author}}</mat-card-subtitle>
+            <mat-card-subtitle>
+                @for(author of bookData.authors; track author; let last = $last) {
+                    {{author.author}}{{ !last ? ', ' : ''}}
+                }
+            </mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image src="https://picsum.photos/400/300" alt="book cover">
         <!--just using an api to get a random image-->

@@ -1,8 +1,12 @@
 <h2 mat-dialog-title>Delete book?</h2>
 <mat-dialog-content>
-  <p>You are attempting to delete:</p> 
-  <p><i>{{book.bookName}}</i> by <i>{{book.author}}</i></p>
-  <p>Are you sure? This action is not reversible!</p> 
+  <p>You are attempting to delete:</p>
+  <p><i>{{book.bookName}}</i> by <i>
+      @for(author of book.authors; track author; let last = $last) {
+        {{author.author}}{{ !last ? ', ' : ''}}
+      }
+    </i></p>
+  <p>Are you sure? This action is not reversible!</p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-stroked-button mat-dialog-close>No</button>

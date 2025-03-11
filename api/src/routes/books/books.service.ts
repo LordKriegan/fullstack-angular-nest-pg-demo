@@ -16,7 +16,7 @@ export class BooksService {
   ) { }
 
   async books(): Promise<Book[]> {
-    return this.bookRepository.find();
+    return this.bookRepository.find({ relations: { authors: true, chapters: true }});
   }
   async searchBooks(bookName?: string, author?: string, chapter?: string, description?: string, minPages?: number, maxPages?: number): Promise<Book[]> {
 
@@ -59,7 +59,7 @@ export class BooksService {
   async getBook(id: number): Promise<Book> {
     const book = await this.bookRepository.findOne({
       where: { id },
-      relations: ['chapters']
+      relations: { authors: true, chapters: true }
     });
     if (!book) {
       throw new HttpException('Book not found!', 404)

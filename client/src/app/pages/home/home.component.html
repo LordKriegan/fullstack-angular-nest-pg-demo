@@ -24,8 +24,12 @@
         </ng-container>
 
         <ng-container matColumnDef="author">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Author</th>
-            <td mat-cell *matCellDef="let book">{{book.author}}</td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Author(s)</th>
+            <td mat-cell *matCellDef="let book">
+                @for(author of book.authors; track author; let last = $last) {
+                    {{author.author}}{{ !last ? ', ' : ''}}
+                }
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="pageCount">

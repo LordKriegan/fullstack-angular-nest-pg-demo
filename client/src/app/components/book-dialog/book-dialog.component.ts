@@ -17,7 +17,7 @@ export class BookDialogComponent {
   ) {
     this.bookForm = new FormGroup({
       bookName: new FormControl(this.book?.bookName || '', [Validators.required, Validators.maxLength(50)]),
-      author: new FormControl(book?.author || '', [Validators.required, Validators.maxLength(50)]),
+      // author: new FormControl(book?.author || '', [Validators.required, Validators.maxLength(50)]),
       description: new FormControl(book?.description || '', [Validators.required, Validators.maxLength(500)]),
       pageCount: new FormControl(book?.pageCount || 1, [Validators.min(1)])
     })
