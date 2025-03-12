@@ -11,3 +11,20 @@ form {
 .mat-mdc-form-field-hint {
     color: red;
 }
+
+.authorRow {
+    display: flex;
+    span {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .mat-mdc-form-field {
+        flex-grow: 1;
+    }
+}
+
+.authorForm {
+    width: 100%;
+}

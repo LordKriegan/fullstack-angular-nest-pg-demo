@@ -43,4 +43,17 @@ export class AuthorService {
         })
     }
 
+    updateAuthor(authorId: number, author: string): Observable<IAuthor> {
+        return new Observable((sub: Subscriber<IAuthor>) => {
+            this.http.put<IAuthor>(`/api/authors/${authorId}`, { author }).pipe(first()).subscribe({
+                next: (response: IAuthor) => {
+                    sub.next(response);
+                    sub.complete();
+                },
+                error: (error: HttpErrorResponse) => {
+                    console.error(error);
+                }
+            })
+        })
+    }
 }
