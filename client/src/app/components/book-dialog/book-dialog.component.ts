@@ -1,13 +1,11 @@
-import { Component, Inject, inject, signal } from '@angular/core';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IBook } from '../../lib/interfaces/book.interface';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CoreModule } from '../../lib/modules/core.module';
 import { IAuthor } from '../../lib/interfaces/author.interface';
-import { MatChipInputEvent } from '@angular/material/chips';
 import { AuthorService } from '../../lib/services/author.service';
-import { firstValueFrom } from 'rxjs';
+import { ChapterService } from '../../lib/services/chapter.service';
 
 @Component({
   selector: 'app-book-dialog',
@@ -27,7 +25,8 @@ export class BookDialogComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public bookData: IBook,
     private dialogRef: MatDialogRef<BookDialogComponent>,
-    private authorsService: AuthorService
+    private authorsService: AuthorService,
+    private chaptersService: ChapterService
   ) {
     this.book = bookData;
     //initializing formgroup here as it may get data from an injected book
@@ -76,11 +75,27 @@ export class BookDialogComponent {
   }
 
   handleRemoveAuthor(authorId: number, index: number) {
-    this.authorsService.removeAuthor(authorId).subscribe({
-      next: () => {
-        this.book?.authors?.splice(index, 1)
-      }
-    })
+    if (this.book?.id) {
+      this.authorsService.removeAuthor(authorId).subscribe({
+        next: () => {
+          this.book?.authors?.splice(index, 1);
+        }
+      })
+    } else {
+      this.book?.authors?.splice(index, 1);
+    }
+  }
+
+  handleRemoveChapter(chapterId: number, index: number) {
+    if (this.book?.id) {
+      this.chaptersService.removeChapter(chapterId).subscribe({
+        next: () => {
+          this.book?.chapters?.splice(index, 1);
+        }
+      })
+    } else {
+      this.book?.chapters?.splice(index, 1);
+    }
   }
 
   getBook() {
