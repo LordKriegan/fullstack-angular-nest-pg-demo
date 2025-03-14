@@ -38,7 +38,14 @@
         }
       }
     </mat-tab>
-    <mat-tab label="Chapters">chapters goes here</mat-tab>
+    <mat-tab label="Chapters">
+      <hr />
+      @if (book) {
+        @for (chapter of book?.chapters; track chapter; let index = $index) {
+          <ng-container [ngTemplateOutlet]="chapterField" [ngTemplateOutletContext]="{ chapterName: chapter.chapterName, pageCount: chapter.pageCount, description: chapter.description, chapterId: chapter.id, index }"></ng-container>
+        }
+      }
+    </mat-tab>
   </mat-tab-group>
 
 </mat-dialog-content>
@@ -62,6 +69,19 @@
       </button>
     }
     <button mat-icon-button (click)="handleRemoveAuthor(authorId, index)"><mat-icon>delete</mat-icon></button>
+  </div>
+  <hr />
+</ng-template>
+
+<ng-template #chapterField let-chapterName="chapterName" let-chapterId="chapterId" let-pageCount="pageCount" let-description="description" let-index="index">
+  <div class="chapterRow" [matTooltip]="description">
+    <span><span><i>{{chapterName}}</i> - {{pageCount}} page(s)</span></span>
+    <button mat-icon-button>
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>delete</mat-icon>
+    </button>
   </div>
   <hr />
 </ng-template>
