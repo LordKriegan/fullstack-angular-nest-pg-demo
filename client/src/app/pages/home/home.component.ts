@@ -90,7 +90,6 @@ export class HomeComponent implements AfterViewInit {
       next: (result: { bookUpdated: boolean, newBook: IBook }) => {
         if (result.bookUpdated) {
           if (result.newBook.id) { //existing book
-            console.log(result.newBook)
             this.bookService.updateBook(result.newBook).subscribe({
               next: (updatedBook: IBook) => {
                 this.dataSource.data[this.dataSource.data.findIndex(elem => elem.id === updatedBook.id)] = result.newBook;
@@ -105,6 +104,8 @@ export class HomeComponent implements AfterViewInit {
               }
             })
           }
+        } else {
+          //todo: handle authors change
         }
       }
     })

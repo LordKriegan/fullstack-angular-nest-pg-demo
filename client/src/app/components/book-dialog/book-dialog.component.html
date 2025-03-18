@@ -7,7 +7,7 @@
           <mat-label>Title</mat-label>
           <input matInput placeholder="Ex. Game of Thrones" #input formControlName="bookName">
           @if (bookForm.controls['bookName'].hasError('required') && bookForm.controls['bookName'].touched) {
-          <mat-hint>Title is required.</mat-hint>
+            <mat-hint>Title is required.</mat-hint>
           }
         </mat-form-field>
         <mat-form-field subscriptSizing="dynamic">
@@ -16,7 +16,7 @@
             placeholder="Ex. A fantastical saga about different royal families navigating their political landscapes while also contending with dragons and ice zombies."
             #input formControlName="description"></textarea>
           @if (bookForm.controls['description'].hasError('required') && bookForm.controls['description'].touched) {
-          <mat-hint>Description is required.</mat-hint>
+            <mat-hint>Description is required.</mat-hint>
           }
         </mat-form-field>
         <mat-form-field>
@@ -51,7 +51,7 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-stroked-button
-    [mat-dialog-close]="{ bookUpdated: bookUpdated && book, newBook: getBook() }">Cancel</button>
+    [mat-dialog-close]="{ bookUpdated: false, newBook: getBook() }">Cancel</button>
   <button mat-raised-button (click)="submitBtn()" color="primary">{{book?.id ? 'Update' : 'Submit'}}</button>
 </mat-dialog-actions>
 

@@ -1,5 +1,5 @@
 export interface IChapter {
-    id: number;
+    id?: number;
     chapterName: string;
     description: string;
     pageCount: number;

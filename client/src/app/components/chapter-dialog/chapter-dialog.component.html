@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>{{chapter ? "Edit Chapter" : "Add Chapter"}}</h2>
+<mat-dialog-content>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-stroked-button
+      [mat-dialog-close]="">Cancel</button>
+    <button mat-raised-button (click)="" color="primary">{{chapter?.id ? 'Update' : 'Add'}}</button>
+</mat-dialog-actions>

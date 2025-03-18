@@ -15,9 +15,8 @@ import { ChapterService } from '../../lib/services/chapter.service';
 })
 export class BookDialogComponent {
 
-  book: IBook | undefined;
+  book?: IBook | undefined;
   bookForm: FormGroup;
-  bookUpdated = false;
 
   authorFormControl = new FormControl('', [Validators.required, Validators.maxLength(50)]);
   authorEditModeIds: number[] = [];
@@ -109,7 +108,7 @@ export class BookDialogComponent {
   submitBtn() {
     if (this.bookForm.valid) {
       const newBook: IBook = this.getBook();
-      this.dialogRef.close({bookUpdated: this.bookUpdated, newBook });
+      this.dialogRef.close({ bookUpdated: true, newBook });
     } else {
       this.bookForm.markAllAsTouched();
     }
