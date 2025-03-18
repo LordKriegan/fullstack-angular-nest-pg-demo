@@ -39,10 +39,10 @@
       }
     </mat-tab>
     <mat-tab label="Chapters">
-      <button class="newChapterBtn" mat-stroked-button color="primary"><mat-icon>add</mat-icon>&nbsp;Add New Chapter</button>
+      <button class="newChapterBtn" mat-stroked-button color="primary" (click)="handleAddChapter()"><mat-icon>add</mat-icon>&nbsp;Add New Chapter</button>
       @if (book) {
         @for (chapter of book?.chapters; track chapter; let index = $index) {
-          <ng-container [ngTemplateOutlet]="chapterField" [ngTemplateOutletContext]="{ chapterName: chapter.chapterName, pageCount: chapter.pageCount, description: chapter.description, chapterId: chapter.id, index }"></ng-container>
+          <ng-container [ngTemplateOutlet]="chapterField" [ngTemplateOutletContext]="{ chapter, index }"></ng-container>
         }
       }
     </mat-tab>
@@ -73,13 +73,13 @@
   <hr />
 </ng-template>
 
-<ng-template #chapterField let-chapterName="chapterName" let-chapterId="chapterId" let-pageCount="pageCount" let-description="description" let-index="index">
-  <div class="chapterRow" [matTooltip]="description">
-    <span><i>{{chapterName}}</i>&nbsp;- {{pageCount}} page(s)</span>
-    <button mat-icon-button>
+<ng-template #chapterField let-chapter="chapter" let-index="index">
+  <div class="chapterRow" [matTooltip]="chapter.description">
+    <span><i>{{chapter.chapterName}}</i>&nbsp;- {{chapter.pageCount}} page(s)</span>
+    <button mat-icon-button (click)="handleUpdateChapter(chapter, index)">
       <mat-icon>edit</mat-icon>
     </button>
-    <button mat-icon-button (click)="handleRemoveChapter(chapterId, index)">
+    <button mat-icon-button (click)="handleRemoveChapter(chapter.id, index)">
       <mat-icon>delete</mat-icon>
     </button>
   </div>

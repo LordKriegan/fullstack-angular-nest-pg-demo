@@ -4,10 +4,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CoreModule } from '../../lib/modules/core.module';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-interface IChapterWithIndex extends IChapter {
-  index?: number;
-}
-
 @Component({
   selector: 'app-chapter-dialog',
   imports: [CoreModule],
@@ -16,18 +12,26 @@ interface IChapterWithIndex extends IChapter {
 })
 export class ChapterDialogComponent {
 
-  chapter?: IChapterWithIndex | undefined;
+  chapter?: IChapter | undefined;
   chapterForm: FormGroup;
-  
+
   constructor(
-    @Inject(MAT_DIALOG_DATA) public chapterData: IChapterWithIndex,
+    @Inject(MAT_DIALOG_DATA) public chapterData: IChapter,
     private dialogRef: MatDialogRef<ChapterDialogComponent>
   ) {
+    this.chapter = chapterData;
     this.chapterForm = new FormGroup({
-      chapterName: new FormControl(chapterData.chapterName, [Validators.required, Validators.max(50)]),
-      pageCount: new FormControl(chapterData.pageCount, [Validators.min(1), Validators.required]),
-      description: new FormControl(chapterData.description, [Validators.required, Validators.max(500)])
+      chapterName: new FormControl(this.chapter?.chapterName || '', [Validators.required, Validators.max(50)]),
+      pageCount: new FormControl(this.chapter?.pageCount || 1, [Validators.min(1), Validators.required]),
+      description: new FormControl(this.chapter?.description || '', [Validators.required, Validators.max(500)])
     })
+  }
+
+  handleSubmit() {
+    this.dialogRef.close(<IChapter>{
+        id: this.chapter?.id,
+        ...this.chapterForm.value
+      })
   }
 
 }

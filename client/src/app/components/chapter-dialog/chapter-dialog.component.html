@@ -1,9 +1,29 @@
 <h2 mat-dialog-title>{{chapter ? "Edit Chapter" : "Add Chapter"}}</h2>
 <mat-dialog-content>
-
+  <form [formGroup]="chapterForm">
+    <mat-form-field subscriptSizing="dynamic">
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="Ex. Game of Thrones" #input formControlName="chapterName">
+      @if (chapterForm.controls['chapterName'].hasError('required') && chapterForm.controls['chapterName'].touched) {
+        <mat-hint>Title is required.</mat-hint>
+      }
+    </mat-form-field>
+    <mat-form-field subscriptSizing="dynamic">
+      <mat-label>Description</mat-label>
+      <textarea rows="10" matInput
+        placeholder="Ex. A fantastical saga about different royal families navigating their political landscapes while also contending with dragons and ice zombies."
+        #input formControlName="description"></textarea>
+      @if (chapterForm.controls['description'].hasError('required') && chapterForm.controls['description'].touched) {
+        <mat-hint>Description is required.</mat-hint>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label># Pages</mat-label>
+      <input matInput type="number" min="1" #input formControlName="pageCount">
+    </mat-form-field>
+  </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-stroked-button
-      [mat-dialog-close]="">Cancel</button>
-    <button mat-raised-button (click)="" color="primary">{{chapter?.id ? 'Update' : 'Add'}}</button>
+    <button mat-stroked-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button (click)="handleSubmit()" color="primary">{{chapter?.id ? 'Update' : 'Add'}}</button>
 </mat-dialog-actions>
